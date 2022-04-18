@@ -43,8 +43,7 @@ public class PlatformsController : ControllerBase
   /// </summary>
   /// <param name="id">Platform Id</param>
   /// <returns>Platform.</returns>
-  [HttpGet]
-  [Route("{id}")]
+  [HttpGet("{id}", Name = nameof(GetPlatformById))]
   [ProducesResponseType(typeof(PlatformReadDto), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
   public ActionResult<PlatformReadDto> GetPlatformById(int id)
@@ -59,14 +58,17 @@ public class PlatformsController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<PlatformReadDto> CreatePlatform(PlatformCreateDto platform)
+  [ProducesResponseType(StatusCodes.Status201Created)]
+  public ActionResult<PlatformReadDto> CreatePlatform(PlatformCreateDto platformCreateDto)
   {
     _logger.LogInformation("Adding new Platform");
 
-    var platformModel = _mapper.Map<Platform>(platform);
+    var platformModel = _mapper.Map<Platform>(platformCreateDto);
     _repo.CreatePlatform(platformModel);
     _repo.SaveChanges();
 
-    return Ok(platformModel);
+    var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
+
+    return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
   }
 }
