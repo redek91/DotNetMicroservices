@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platforms-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platformservice
+  template:
+    metadata:
+      labels:
+        app: platformservice
+    spec:
+      containers:
+        - name: platformservice
+          image: redeaglekiller/platformservice
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

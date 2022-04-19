@@ -57,6 +57,11 @@ public class PlatformsController : ControllerBase
     return Ok(_mapper.Map<PlatformReadDto>(platform));
   }
 
+  /// <summary>
+  /// Creates a new Platform
+  /// </summary>
+  /// <param name="platformCreateDto"><see cref="PlatformCreateDto"/></param>
+  /// <returns><see cref="PlatformReadDto"/></returns>
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status201Created)]
   public ActionResult<PlatformReadDto> CreatePlatform(PlatformCreateDto platformCreateDto)
