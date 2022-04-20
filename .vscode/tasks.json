@@ -1,39 +1,74 @@
 {
   "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "build",
+  "tasks": [{
+      "label": "platformsService:build",
       "command": "dotnet",
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/PlatformService/PlatformService.csproj",
+        "${workspaceFolder}/PlatformsService/PlatformsService.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "publish",
+      "label": "platformsService:publish",
       "command": "dotnet",
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/PlatformService/PlatformService.csproj",
+        "${workspaceFolder}/PlatformsService/PlatformsService.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "watch",
+      "label": "platformsService:watch",
       "command": "dotnet",
       "type": "process",
       "args": [
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/PlatformService/PlatformService.csproj"
+        "${workspaceFolder}/PlatformsService/PlatformsService.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "commandsService:build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/CommandsService/CommandsService.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "commandsService:publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/CommandsService/CommandsService.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "commandsService:watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/CommandsService/CommandsService.csproj"
       ],
       "problemMatcher": "$msCompile"
     }
