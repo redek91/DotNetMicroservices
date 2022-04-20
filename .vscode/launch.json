@@ -52,5 +52,12 @@
         "/Views": "${workspaceFolder}/Views"
       }
     }
-  ]
+  ],
+  "compounds": [{
+    "name": "Launch Services",
+    "configurations": [
+      ".NET Core Launch (web) - CommandsService",
+      ".NET Core Launch (web) - PlatformsService"
+    ]
+  }]
 }
