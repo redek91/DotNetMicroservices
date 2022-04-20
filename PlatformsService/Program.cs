@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(options =>
   options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
   {
     Version = "v1",
-    Title = "Platform API",
+    Title = "Platforms API",
     Description = "An ASP.NET Core REST API for managing Platforms"
   });
 

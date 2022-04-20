@@ -14,6 +14,10 @@ public class PlatformsController : ControllerBase
     _logger = logger;
   }
 
+  /// <summary>
+  /// Test Call for inbound post
+  /// </summary>
+  /// <returns></returns>
   [HttpPost]
   public ActionResult TestInboundConnection()
   {
