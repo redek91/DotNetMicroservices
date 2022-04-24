@@ -25,6 +25,11 @@ public class PlatformRepo : IPlatformRepo
     return _context.Platforms.FirstOrDefault(x => x.Id == id);
   }
 
+  public void DeletePlatform(Platform platform)
+  {
+    if (platform != null) _context.Remove(platform);
+  }
+
   public bool SaveChanges()
   {
     return _context.SaveChanges() >= 0;

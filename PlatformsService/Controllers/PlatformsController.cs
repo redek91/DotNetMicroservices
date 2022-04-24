@@ -89,4 +89,28 @@ public class PlatformsController : ControllerBase
 
     return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
   }
+
+  /// <summary>
+  /// Deletes an existing Platform
+  /// </summary>
+  /// <param name="id">Platform Id</param>
+  /// <returns></returns>
+  [HttpDelete("{id}")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  public ActionResult DeletePlatform(int id)
+  {
+    var platformToDelete = _repo.GetPlatformById(id);
+
+    if (platformToDelete == null)
+    {
+      _logger.LogError($"No Platform with id:{id}");
+      return NotFound();
+    }
+
+    _logger.LogInformation($"Delete Platform with id {id}");
+    _repo.DeletePlatform(platformToDelete);
+    _repo.SaveChanges();
+    return Ok();
+  }
 }
