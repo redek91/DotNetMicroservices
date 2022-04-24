@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
 using PlatformService.Dtos;
 using PlatformService.Models;
+using PlatformsService.SyncDataServices.Http;
 
 namespace PlatformService.Controllers;
 
@@ -14,14 +15,17 @@ public class PlatformsController : ControllerBase
   private readonly ILogger<PlatformsController> _logger;
   private readonly IPlatformRepo _repo;
   private readonly IMapper _mapper;
+  private readonly ICommandDataClient _commandDataClient;
 
   public PlatformsController(
     ILogger<PlatformsController> logger,
     IPlatformRepo repo,
-    IMapper mapper)
+    IMapper mapper,
+    ICommandDataClient commandDataClient)
   {
     _repo = repo;
     _mapper = mapper;
+    _commandDataClient = commandDataClient;
     _logger = logger;
   }
 
@@ -64,7 +68,7 @@ public class PlatformsController : ControllerBase
   /// <returns><see cref="PlatformReadDto"/></returns>
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status201Created)]
-  public ActionResult<PlatformReadDto> CreatePlatform(PlatformCreateDto platformCreateDto)
+  public async Task<ActionResult<PlatformReadDto>> CreatePlatform(PlatformCreateDto platformCreateDto)
   {
     _logger.LogInformation("Adding new Platform");
 
@@ -73,6 +77,15 @@ public class PlatformsController : ControllerBase
     _repo.SaveChanges();
 
     var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
+
+    try
+    {
+      await _commandDataClient.SendPlatformToCommand(platformReadDto);
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError(ex, $"Could not send synchronously");
+    }
 
     return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
   }
