@@ -35,5 +35,6 @@ kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/i
 ## Todo
 
 - [ ] Persist Rabbit MQ
+- [ ] Use MassTransit
 - [ ] Clean Architecture
 - [ ] Autoscaler in K8S

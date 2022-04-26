@@ -37,7 +37,7 @@ public class PlatformsController : ControllerBase
   /// </summary>
   /// <returns></returns>
   [HttpPost]
-  public ActionResult TestInboundConnection()
+  public ActionResult CreatePlatform()
   {
     _logger.LogInformation("--> Inbound POST # Command Service");
 
