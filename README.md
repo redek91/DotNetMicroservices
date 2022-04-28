@@ -29,7 +29,7 @@ kubectl create secret generic mssql --from-literal=SA_PASSWORD="meisterKey1$"
 - ### ingress-nginx (API-Gateway)
 
 ```
-kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 ## Todo
