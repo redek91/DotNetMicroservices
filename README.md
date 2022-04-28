@@ -19,6 +19,8 @@ In the solution there are examples for 3 data exchange types:
 - Asynchronous exchange: the PlatformsAPI publishes an Event to a MessageBus(RabbitMQ) and the CommandsAPI consumes the Event to create a new Platform
 - GRPC: ....to be done
 
+Note: the containers are communicating using the DNS names specified in the ClusterIp services ex: "platforms-clusterip-srv"
+
 ## Kubernetes
 
 - Pod: A pod is a placeholder for a container instance and it ensures that the instance is running (retry)
@@ -34,12 +36,14 @@ In the solution there are examples for 3 data exchange types:
 
 ## Usefull commands
 
+- `dotnet add {projectFolder} package {packagename}`: add package from solution folder
+- `dotnet dev-certs https --trust`: add development certificates to keystore (to trust local https)
 - `kubectl [--namespace {namespace}] get deployments`: lists all deployments and status
 - `kubectl [--namespace {namespace}] get services`: lists all services
 - `kubectl [--namespace {namespace}] get pods`: lists all pods and status
 - `kubectl [--namespace {namespace}] get pvc`: lists all persistent storage claims and status
 - `kubectl [--namespace {namespace}] delete {type, ex:service} {name}`: deletes objects
-- `kubectl [--namespace {namespace}] rollout restart deployment {name}`: restarts a deployment (used to download docker images again -> upgrades)
+- `kubectl [--namespace {namespace}] rollout restart deployment {name}`: restarts a deployment (used to download docker images again -> upgrades), used if yaml file has not changed, but the docker image has
 
 !!Check PDF in docs for usefull K8S & Docker commands
 
