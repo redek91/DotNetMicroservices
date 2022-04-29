@@ -17,7 +17,7 @@ In the solution there are examples for 3 data exchange types:
 
 - Synchronous exchange: the PlatformsAPI posts new Platforms to the CommandsAPI per POST/PUT request
 - Asynchronous exchange: the PlatformsAPI publishes an Event to a MessageBus(RabbitMQ) and the CommandsAPI consumes the Event to create a new Platform
-- GRPC: ....to be done
+- GRPC: Synchronous exchange used to retrieve Platforms from the PlatformsApi to seed data in the CommandsAPI
 
 Note: the containers are communicating using the DNS names specified in the ClusterIp services ex: "platforms-clusterip-srv"
 
@@ -77,3 +77,5 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 - [ ] Use MassTransit
 - [ ] Clean Architecture
 - [ ] Autoscaler in K8S
+- [ ] Try a multi-node K8S infrastructure
+- [ ] Deployment priority (Deploy CommandsApi only if PlatformsApi already runs, possible???)
