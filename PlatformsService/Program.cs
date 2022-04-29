@@ -56,20 +56,20 @@ if (app.Environment.IsDevelopment())
 
 PrepDb.PrepPopulation(app);
 
+app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-  endpoints.MapControllers();
-  endpoints.MapGrpcService<GrpcPlatformService>();
-
   // Serve GRPC contracts
   endpoints.MapGet("/protos/platforms.proto", async context =>
   {
     await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
   });
+  endpoints.MapGrpcService<GrpcPlatformService>();
+  endpoints.MapControllers();
 });
 
 app.Run();
